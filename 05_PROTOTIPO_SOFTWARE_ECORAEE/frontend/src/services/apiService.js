@@ -56,12 +56,12 @@ export const ApiService = {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 1500);
-      const res = await fetch(`${API_BASE_URL}/devices/`, {
+      const res = await fetch("http://localhost:8000/health", {
         method: "GET",
         signal: controller.signal
       });
       clearTimeout(timeoutId);
-      return res.ok || res.status === 401;
+      return res.ok;
     } catch (e) {
       return false;
     }
